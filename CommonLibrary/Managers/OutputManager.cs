@@ -3,7 +3,7 @@ using CommonLibrary.Objects;
 
 namespace CommonLibrary
 {
-    public class OutputManager
+    public class OutputManager : IOutputManager
     {
         public void RequestStockSymbol()
         {

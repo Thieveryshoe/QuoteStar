@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace CommonLibrary
 {
-    public class AlphaVantageAPIManager
+    public class AlphaVantageAPIManager : IAlphaVantageAPIManager
     {
         public AlphaRequest BuildApiRequest(string stockSymbol)
         {

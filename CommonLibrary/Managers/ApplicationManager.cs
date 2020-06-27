@@ -3,17 +3,17 @@ using CommonLibrary.Objects;
 
 namespace CommonLibrary
 {
-    public class ApplicationManager
+    public class ApplicationManager : IApplicationManager
     {
-        private InputManager _inputManager;
-        private OutputManager _outputManager;
-        private AlphaVantageAPIManager _apiManager;
+        private IInputManager _inputManager;
+        private IOutputManager _outputManager;
+        private IAlphaVantageAPIManager _apiManager;
 
-        private string stockSymbol { get; set; }
-        private AlphaRequest request { get; set; }
-        private GlobalQuote globalQuote { get; set; }
+        public string StockSymbol { get; set; }
+        public AlphaRequest Request { get; set; }
+        public GlobalQuote GlobalQuote { get; set; }
 
-        public ApplicationManager(InputManager inputManager, OutputManager outputManager, AlphaVantageAPIManager apiManager)
+        public ApplicationManager(IInputManager inputManager, IOutputManager outputManager, IAlphaVantageAPIManager apiManager)
         {
             _inputManager = inputManager;
             _outputManager = outputManager;
@@ -23,13 +23,13 @@ namespace CommonLibrary
         public void StartProgram()
         {
             _outputManager.RequestStockSymbol();
-            stockSymbol = _inputManager.RecordStockSymbol();
+            StockSymbol = _inputManager.RecordStockSymbol();
             // check for valid stock symbol from DB
-            request = _apiManager.BuildApiRequest(stockSymbol);
-            globalQuote = _apiManager.ExecuteApiRequest(request);
+            Request = _apiManager.BuildApiRequest(StockSymbol);
+            GlobalQuote = _apiManager.ExecuteApiRequest(Request);
             // record globalQuote results in DB
-            _outputManager.PrintQuoteInfo(globalQuote);
-            Console.ReadKey();
+            _outputManager.PrintQuoteInfo(GlobalQuote);
+            //Console.ReadKey();
         }
     }
 }

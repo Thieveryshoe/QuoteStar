@@ -2,7 +2,7 @@
 
 namespace CommonLibrary
 {
-    public class InputManager
+    public class InputManager : IInputManager
     {
         public string RecordStockSymbol()
         {
